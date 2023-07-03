@@ -25,8 +25,10 @@ public class Oms implements Order {
     public String searchBidTree(Trade trade, ArrayList<Trade> bidList) {
         var status = Status.RESTING;
         for (Trade ask : bidList) {
-            if (ask.size() >= trade.size()) {
+            if (ask.size() == trade.size()) {
                 status = Status.FILLED;
+            } else if (ask.size() < trade.size() && ask.size() != 0) {
+                status = Status.PARTIAL;
             }
         }
         return execution.tradeExecution(id, status);
@@ -36,8 +38,10 @@ public class Oms implements Order {
         // use binary search tree?
         var status = Status.RESTING;
         for (Trade bid : askList) {
-            if (bid.size() >= trade.size()) {
+            if (bid.size() == trade.size()) {
                 status = Status.FILLED;
+            } else if (bid.size() < trade.size() && bid.size() != 0) {
+                status = Status.PARTIAL;
             }
         }
         return execution.tradeExecution(id, status);
