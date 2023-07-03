@@ -7,8 +7,19 @@ public class Trade {
 
     public Trade (double price, long size, Side side){
         this.price = price;
-        this. size =size;
+        this. size = size;
         this.side = side;
     }
 
+    public double price() {
+        return price;
+    }
+
+    public long size() {
+        return size;
+    }
+
+    public Side side() {
+        return side;
+    }
 }

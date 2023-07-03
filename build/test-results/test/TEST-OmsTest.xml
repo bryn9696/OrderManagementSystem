@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="OmsTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2023-07-03T14:27:02" hostname="Bryns-MacBook-Pro.local" time="0.02">
+  <properties/>
+  <testcase name="Cancelling a existing trade will return cancelled and return id, status" classname="OmsTest" time="0.007"/>
+  <testcase name="A non-crossing ASK will be requested and return id, status" classname="OmsTest" time="0.009"/>
+  <testcase name="A crossing BID will be accepted and return id, status" classname="OmsTest" time="0.0"/>
+  <testcase name="A crossing ASK will be accepted and return id, status" classname="OmsTest" time="0.001"/>
+  <testcase name="An ASK with a greater quantity the Bid will be Partially filled and return id, status" classname="OmsTest" time="0.001"/>
+  <testcase name="A non-crossing BID will be requested and return id, status" classname="OmsTest" time="0.0"/>
+  <testcase name="A BID with a greater quantity the Ask will be Partially filled and return id, status" classname="OmsTest" time="0.0"/>
+  <testcase name="Cancelling a non existing trade will return none" classname="OmsTest" time="0.0"/>
+  <system-out><![CDATA[0-99.5-BUY
+100-99.5-ASK
+0-99.5-BUY
+100-99.5-ASK
+100-99.5-ASK
+100-99.5-BUY
+100-99.5-ASK
+100-99.5-BUY
+100-99.5-BUY
+100-99.5-ASK
+100-99.5-BUY
+100-99.5-ASK
+0-99.5-ASK
+100-99.5-BUY
+0-99.5-ASK
+100-99.5-BUY
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
