@@ -17,103 +17,125 @@ public class OmsTest {
     @Test
     @DisplayName("A crossing ASK will be accepted and return id, status")
     void askAccepted(){
-        var tradeBid = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk = new Trade(99.5, 100, Side.ASK);
-        var tradeBid1 = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk1 = new Trade(99.5, 100, Side.ASK);
+        var tradeBid = new Trade(0, 99.5, 100, Side.BUY);
+        var tradeAsk = new Trade(1, 99.5, 100, Side.ASK);
+        var tradeBid1 = new Trade(2,83.5, 100, Side.BUY);
+        var tradeAsk1 = new Trade(3,83.5, 100, Side.ASK);
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
-        assertEquals("2, FILLED", tradeAskOne);
-        assertEquals("4, FILLED", tradeAskTwo);
+        assertEquals("1, FILLED", tradeAskOne);
+        assertEquals("3, FILLED", tradeAskTwo);
     }
 
     @Test
     @DisplayName("A crossing BID will be accepted and return id, status")
     void bidAccepted(){
-        var tradeBid = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk = new Trade(99.5, 100, Side.ASK);
-        var tradeBid1 = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk1 = new Trade(99.5, 100, Side.ASK);
+        var tradeBid = new Trade(1,99.5, 100, Side.BUY);
+        var tradeAsk = new Trade(0,99.5, 100, Side.ASK);
+        var tradeBid1 = new Trade(2,99.5, 100, Side.BUY);
+        var tradeAsk1 = new Trade(3,99.5, 100, Side.ASK);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
 
-        assertEquals("2, FILLED", tradeBidOne);
-        assertEquals("4, FILLED", tradeBidTwo);
+        assertEquals("1, FILLED", tradeBidOne);
+        assertEquals("2, FILLED", tradeBidTwo);
     }
 
     @Test
     @DisplayName("A non-crossing ASK will be requested and return id, status")
     void askRequested(){
-        var tradeBid = new Trade(99.5, 0, Side.BUY);
-        var tradeAsk = new Trade(99.5, 100, Side.ASK);
-        var tradeBid1 = new Trade(99.5, 0, Side.BUY);
-        var tradeAsk1 = new Trade(99.5, 100, Side.ASK);
+        var tradeBid = new Trade(0,99.5, 0, Side.BUY);
+        var tradeAsk = new Trade(1,99.5, 100, Side.ASK);
+        var tradeBid1 = new Trade(2,99.5, 0, Side.BUY);
+        var tradeAsk1 = new Trade(3,99.5, 100, Side.ASK);
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
 
-        assertEquals("2, RESTING", tradeAskOne);
-        assertEquals("4, RESTING", tradeAskTwo);}
+        assertEquals("1, RESTING", tradeAskOne);
+        assertEquals("3, RESTING", tradeAskTwo);}
 
     @Test
     @DisplayName("A non-crossing BID will be requested and return id, status")
     void bidRequested(){
-        var tradeBid = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk = new Trade(99.5, 0, Side.ASK);
-        var tradeBid1 = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk1 = new Trade(99.5, 0, Side.ASK);
+        var tradeBid = new Trade(1,99.5, 100, Side.BUY);
+        var tradeAsk = new Trade(0,99.5, 0, Side.ASK);
+        var tradeBid1 = new Trade(3,99.5, 100, Side.BUY);
+        var tradeAsk1 = new Trade(2,99.5, 0, Side.ASK);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
 
-        assertEquals("2, RESTING", tradeBidOne);
-        assertEquals("4, RESTING", tradeBidTwo);
+        assertEquals("1, RESTING", tradeBidOne);
+        assertEquals("3, RESTING", tradeBidTwo);
     }
 
     @Test
     @DisplayName("An ASK with a greater quantity the Bid will be Partially filled and return id, status")
     void askPartial(){
-        var tradeBid = new Trade(99.5, 50, Side.BUY);
-        var tradeAsk = new Trade(99.5, 100, Side.ASK);
-        var tradeBid1 = new Trade(99.5, 50, Side.BUY);
-        var tradeAsk1 = new Trade(99.5, 100, Side.ASK);
+        var tradeBid = new Trade(0,99.5, 50, Side.BUY);
+        var tradeAsk = new Trade(1,99.5, 100, Side.ASK);
+        var tradeBid1 = new Trade(2,99.5, 50, Side.BUY);
+        var tradeAsk1 = new Trade(3,99.5, 100, Side.ASK);
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
 
-        assertEquals("2, PARTIAL", tradeAskOne);
-        assertEquals("4, PARTIAL", tradeAskTwo);
+        assertEquals("1, PARTIAL", tradeAskOne);
+        assertEquals("3, PARTIAL", tradeAskTwo);
     }
 
     @Test
     @DisplayName("A BID with a greater quantity the Ask will be Partially filled and return id, status")
     void bidPartial(){
-        var tradeBid = new Trade(99.5, 150, Side.BUY);
-        var tradeAsk = new Trade(99.5, 50, Side.ASK);
-        var tradeBid1 = new Trade(99.5, 100, Side.BUY);
-        var tradeAsk1 = new Trade(99.5, 250, Side.ASK);
+        var tradeBid = new Trade(1,99.5, 150, Side.BUY);
+        var tradeAsk = new Trade(0,99.5, 50, Side.ASK);
+        var tradeBid1 = new Trade(3,99.5, 100, Side.BUY);
+        var tradeAsk1 = new Trade(2,99.5, 250, Side.ASK);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
 
-        assertEquals("2, PARTIAL", tradeBidOne);
-        assertEquals("4, PARTIAL", tradeBidTwo);
+        assertEquals("1, PARTIAL", tradeBidOne);
+        assertEquals("3, PARTIAL", tradeBidTwo);
     }
 
     @Test
     @DisplayName("Cancelling a non existing trade will return none")
-    void cancelNonExistingBid(){}
+    void cancelNonExistingBid(){
+        var tradeBid = new Trade(0, 99.5, 150, Side.BUY);
+        var tradeBid1 = new Trade(1, 99.5, 50, Side.BUY);
+        var tradeBid2 = new Trade(2, 99.5, 100, Side.BUY);
+        var tradeBidOne = oms.placeOrder(tradeBid);
+        var tradeBidTwo = oms.placeOrder(tradeBid1);
+        var tradeBidThree = oms.placeOrder(tradeBid2);
+
+        var cancel = oms.cancelOrder(4);
+
+        assertEquals("-1, NONE", cancel);
+    }
 
     @Test
-    @DisplayName("Cancelling a existing trade will return cancelled and return id, status")
-    void cancelExistingBid(){}
+    @DisplayName("Cancelling an existing trade will return cancelled and return id, status")
+    void cancelExistingBid(){
+        var tradeBid = new Trade(0, 99.5, 150, Side.BUY);
+        var tradeBid1 = new Trade(1, 99.5, 50, Side.BUY);
+        var tradeBid2 = new Trade(2, 99.5, 100, Side.BUY);
+        var tradeBidOne = oms.placeOrder(tradeBid);
+        var tradeBidTwo = oms.placeOrder(tradeBid1);
+        var tradeBidThree = oms.placeOrder(tradeBid2);
+
+        var cancel = oms.cancelOrder(2);
+
+        assertEquals("2, CANCELLED", cancel);
+    }
 
 }

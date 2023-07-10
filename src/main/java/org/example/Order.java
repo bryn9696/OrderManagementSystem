@@ -5,6 +5,8 @@ public interface Order {
         return null;
     }
 
-    public default void cancelOrder(int OrderId){}
+    public default String cancelOrder(int OrderId){
+        return null;
+    }
 
 }

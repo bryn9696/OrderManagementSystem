@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -13,7 +14,6 @@ public class Oms implements Order {
 
     public String placeOrder(Trade trade) {
         id += 1;
-        System.out.println(trade.size() +"-"+ trade.price()+"-"+trade.side());
         addTradesToTree(trade);
         if (trade.side().equals(Side.BUY)) {
             return searchAskTree(trade, askList);
@@ -31,7 +31,7 @@ public class Oms implements Order {
                 status = Status.PARTIAL;
             }
         }
-        return execution.tradeExecution(id, status);
+        return execution.tradeExecution(trade.getId(), status);
     }
 
     public String searchAskTree(Trade trade, ArrayList<Trade> askList) {
@@ -44,20 +44,32 @@ public class Oms implements Order {
                 status = Status.PARTIAL;
             }
         }
-        return execution.tradeExecution(id, status);
+        return execution.tradeExecution(trade.getId(), status);
     }
 
     public void addTradesToTree(Trade trade) {
-
         if (trade.side().equals(Side.BUY)) {
             bidList.add(trade);
+            bidList.sort(Comparator.comparing(t -> trade.price()));
+            System.out.println(bidList.get(0));
         } else {
             askList.add(trade);
         }
     }
 
-    public void cancelOrder(int orderId){
+    public String cancelOrder(int orderId){
+        var status = Status.RESTING;
+        int tradeId = -1;
+        for (Trade bid : bidList) {
+            if (bid.getId() == orderId) {
+                tradeId = bid.getId();
+                status = Status.CANCELLED;
+            } else if (bid.getId() != orderId) {
+                status = Status.NONE;
+            }
+        }
 
+        return execution.tradeExecution(tradeId, status);
     }
     public static void main(String[] args) {
         // Press Opt+Enter with your caret at the highlighted text to see how
