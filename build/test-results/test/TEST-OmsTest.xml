@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="OmsTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2023-07-10T14:25:48" hostname="Bryns-MacBook-Pro.local" time="0.019">
+<testsuite name="OmsTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2023-09-12T13:57:24" hostname="Bryns-MacBook-Pro.local" time="0.015">
   <properties/>
-  <testcase name="A non-crossing ASK will be requested and return id, status" classname="OmsTest" time="0.011"/>
+  <testcase name="A non-crossing ASK will be requested and return id, status" classname="OmsTest" time="0.009"/>
   <testcase name="A crossing BID will be accepted and return id, status" classname="OmsTest" time="0.0"/>
   <testcase name="A crossing ASK will be accepted and return id, status" classname="OmsTest" time="0.0"/>
   <testcase name="Cancelling an existing trade will return cancelled and return id, status" classname="OmsTest" time="0.001"/>
   <testcase name="An ASK with a greater quantity the Bid will be Partially filled and return id, status" classname="OmsTest" time="0.001"/>
-  <testcase name="A non-crossing BID will be requested and return id, status" classname="OmsTest" time="0.001"/>
-  <testcase name="A BID with a greater quantity the Ask will be Partially filled and return id, status" classname="OmsTest" time="0.001"/>
-  <testcase name="Cancelling a non existing trade will return none" classname="OmsTest" time="0.001"/>
-  <system-out><![CDATA[org.example.Trade@3abada5a
-org.example.Trade@3abada5a
-org.example.Trade@58be6e8
-org.example.Trade@58be6e8
-org.example.Trade@7331196b
-org.example.Trade@7331196b
-org.example.Trade@3f9342d4
-org.example.Trade@3f9342d4
-org.example.Trade@3f9342d4
-org.example.Trade@ab7395e
-org.example.Trade@ab7395e
-org.example.Trade@50d13246
-org.example.Trade@50d13246
-org.example.Trade@2bd08376
-org.example.Trade@2bd08376
-org.example.Trade@e70f13a
-org.example.Trade@e70f13a
-org.example.Trade@e70f13a
-]]></system-out>
+  <testcase name="A non-crossing BID will be requested and return id, status" classname="OmsTest" time="0.0"/>
+  <testcase name="A BID with a greater quantity the Ask will be Partially filled and return id, status" classname="OmsTest" time="0.0"/>
+  <testcase name="Cancelling a non existing trade will return none" classname="OmsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

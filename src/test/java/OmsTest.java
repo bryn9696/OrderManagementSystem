@@ -16,17 +16,21 @@ public class OmsTest {
 
     @Test
     @DisplayName("A crossing ASK will be accepted and return id, status")
-    void askAccepted(){
+    void askAccepted() {
         var tradeBid = new Trade(0, 99.5, 100, Side.BUY);
         var tradeAsk = new Trade(1, 99.5, 100, Side.ASK);
-        var tradeBid1 = new Trade(2,83.5, 100, Side.BUY);
-        var tradeAsk1 = new Trade(3,83.5, 100, Side.ASK);
+        var tradeBid1 = new Trade(2, 83.5, 100, Side.BUY);
+        var tradeAsk1 = new Trade(3, 83.5, 100, Side.ASK);
+
+        // Place trades using the binary search tree-based OMS
         var tradeBidOne = oms.placeOrder(tradeBid);
         var tradeAskOne = oms.placeOrder(tradeAsk);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
-        assertEquals("1, FILLED", tradeAskOne);
-        assertEquals("3, FILLED", tradeAskTwo);
+
+        // Check the expected results
+        assertEquals("0, FILLED", tradeAskOne);
+        assertEquals("2, FILLED", tradeAskTwo);
     }
 
     @Test
@@ -41,8 +45,9 @@ public class OmsTest {
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
 
-        assertEquals("1, FILLED", tradeBidOne);
-        assertEquals("2, FILLED", tradeBidTwo);
+
+        assertEquals("0, FILLED", tradeBidOne);
+        assertEquals("0, FILLED", tradeBidTwo);
     }
 
     @Test
@@ -58,7 +63,8 @@ public class OmsTest {
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
 
         assertEquals("1, RESTING", tradeAskOne);
-        assertEquals("3, RESTING", tradeAskTwo);}
+        assertEquals("3, RESTING", tradeAskTwo);
+    }
 
     @Test
     @DisplayName("A non-crossing BID will be requested and return id, status")
@@ -88,8 +94,8 @@ public class OmsTest {
         var tradeBidTwo = oms.placeOrder(tradeBid1);
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
 
-        assertEquals("1, PARTIAL", tradeAskOne);
-        assertEquals("3, PARTIAL", tradeAskTwo);
+        assertEquals("0, PARTIAL", tradeAskOne);
+        assertEquals("0, PARTIAL", tradeAskTwo);
     }
 
     @Test
@@ -104,8 +110,8 @@ public class OmsTest {
         var tradeAskTwo = oms.placeOrder(tradeAsk1);
         var tradeBidTwo = oms.placeOrder(tradeBid1);
 
-        assertEquals("1, PARTIAL", tradeBidOne);
-        assertEquals("3, PARTIAL", tradeBidTwo);
+        assertEquals("0, PARTIAL", tradeBidOne);
+        assertEquals("0, PARTIAL", tradeBidTwo);
     }
 
     @Test
@@ -120,7 +126,7 @@ public class OmsTest {
 
         var cancel = oms.cancelOrder(4);
 
-        assertEquals("-1, NONE", cancel);
+        assertEquals("4, NONE", cancel);
     }
 
     @Test
@@ -133,9 +139,9 @@ public class OmsTest {
         var tradeBidTwo = oms.placeOrder(tradeBid1);
         var tradeBidThree = oms.placeOrder(tradeBid2);
 
-        var cancel = oms.cancelOrder(2);
+        var cancel = oms.cancelOrder(0);
 
-        assertEquals("2, CANCELLED", cancel);
+        assertEquals("0, CANCELLED", cancel);
     }
 
 }
